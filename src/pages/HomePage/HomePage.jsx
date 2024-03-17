@@ -1,9 +1,8 @@
+import { useState } from "react"
 import MovieList from "../../components/MovieList/MovieList"
 
+
 export default function HomePage() {
-  return (
-    <div>
-          
-    </div>
-  );
+  const [movies, setMovies] = useState([])
+  
 }
