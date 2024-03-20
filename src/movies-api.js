@@ -1,30 +1,36 @@
-import axios from "axios";
+import axios from 'axios';
 
-const url = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
-
-const options = {
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+const details = {
   headers: {
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWUxYWExOGZjMjU3NTAyOTgxOTdlYTMzZTEzYmEyZCIsInN1YiI6IjY1ZjI1ZTVjMmZkZWM2MDE3MDIxOGVlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OlShGZBsYMzfdminRWQTrcgcT_tn5G7_9QXa92iRne8'
-  }
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2M3M2U1ZmZjYmM3M2QxMzZjNzVlNjgzNzgyNWMwOSIsInN1YiI6IjY1ZThhNjZmZWE0MjYzMDE0ODIxMzg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YYO_HkBYktrFDc7YLqc5t-uJVjluAhdjAZzgD3mpi00',
+  },
+  params: {},
+};
+const url = 'trending/movie/day?language=en-US';
+
+export const getMovies = async () => {
+  const response = await axios.get(url, details);
+  return response.data.results;
 };
 
-axios.get(url, options)
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+export async function fetchMovie(id) {
+  const { data } = await axios.get(`/movie/${id}`, details);
+  return data;
+}
 
+export async function fetchMovieCredits(id) {
+  const { data } = await axios.get(`/movie/${id}/credits`, details);
+  return data.cast;
+}
 
+export async function fetchMovieReview(id) {
+  const { data } = await axios.get(`/movie/${id}/reviews`, details);
+  return data.results;
+}
 
-
-// const apiKey = "cae1aa18fc25750298197ea33e13ba2d";
-
-// const api = axios.create({
-//   baseURL: "https://api.themoviedb.org/3/",
-//   headers: {
-//     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWUxYWExOGZjMjU3NTAyOTgxOTdlYTMzZTEzYmEyZCIsInN1YiI6IjY1ZjI1ZTVjMmZkZWM2MDE3MDIxOGVlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OlShGZBsYMzfdminRWQTrcgcT_tn5G7_9QXa92iRne8'
-//   },
-//   params: {
-//     api_key: apiKey
-//   }
-// });
-
-// export default api;
+export async function fetchMoviesByTitle(search) {
+  const { data } = await axios.get(`/search/movie?query=${search}`, details);
+  return data.results;
+}
