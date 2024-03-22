@@ -28,7 +28,7 @@ const MoviesPage = () => {
     <div>
       <h1>Trending today</h1>
       {isLoading && <b>Loading movies...</b>}
-      {error && <b>HTPP ERROR!!!</b>}
+      {error && <b>HTTP ERROR!!!</b>}
       {movies.length > 0 && <MovieList movies={movies}></MovieList>}
     </div>
   );

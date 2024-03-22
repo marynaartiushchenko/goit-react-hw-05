@@ -1,12 +1,14 @@
 import { Suspense, useEffect, useState } from "react";
 import {useParams, Outlet } from "react-router-dom";
 import { fetchMovie } from "../../movies-api";
+import MovieItem from "../../components/MovieItem/MovieItem"
+import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo"
 
 export default function MovieDetailsPage() {
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
 
   useEffect(() => {
     async function getMovie() {
@@ -30,8 +32,13 @@ export default function MovieDetailsPage() {
 
       {error && <p>Something wrong...</p>}
 
-      {movie && (
+       {movie && (
         <>
+          <MovieItem movie={movie} />
+          <div >
+            <h2 >Additional information:</h2>
+          </div>
+          <AdditionalInfo />
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>

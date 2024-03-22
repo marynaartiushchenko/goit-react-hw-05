@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { TiArrowBackOutline } from "react-icons/ti";
+import { SlActionUndo } from "react-icons/sl";
 
 export default function GoBackLink() {
   const location = useLocation();
@@ -10,7 +10,7 @@ export default function GoBackLink() {
     <div> 
       <Link to={goBack.current}>
         
-        <TiArrowBackOutline /> Go back
+        <SlActionUndo /> Go back
       </Link>
     </div>
   );
