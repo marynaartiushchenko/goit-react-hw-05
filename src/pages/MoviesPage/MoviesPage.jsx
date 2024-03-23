@@ -2,44 +2,49 @@ import { useEffect, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { fetchMoviesByTitle } from '../../movies-api';
 import MoviesFilter from '../../components/MoviesFilter/MoviesFilter';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams} from 'react-router-dom';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [params, setParams] = useSearchParams();
 
-  const [params] = useSearchParams();
   const movieTitle = params.get('query') ?? '';
 
   useEffect(() => {
     async function refreshMovies() {
-      handleSubmit(movieTitle);
+      await fetchMovies(movieTitle);
     }
 
     refreshMovies();
   }, [movieTitle]);
 
-  const handleSubmit = async movieTitle => {
+  const fetchMovies = async movieTitle => {
     try {
       setMovies([]);
       setIsLoading(true);
       setError(null);
       const data = await fetchMoviesByTitle(movieTitle);
-
       setMovies(data);
     } catch (error) {
-      setError(true);
+      setError('Failed to fetch movies. Please try again later.');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = query => {
+    setParams({ query });
+    history.push(`/movies?query=${query}`);
+    fetchMovies(query);
   };
 
   return (
     <>
       <MoviesFilter onSubmit={handleSubmit} />
       <div>
-        {error && <p>Something wrong...</p>}
+        {error && <p>{error}</p>}
         {movies.length === 0 && !isLoading && !error && !movieTitle && (
           <p>No movies found for the given query</p>
         )}

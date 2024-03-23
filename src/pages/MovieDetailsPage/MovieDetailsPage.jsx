@@ -1,8 +1,8 @@
 import { Suspense, useEffect, useState } from "react";
-import {useParams, Outlet } from "react-router-dom";
+import { useParams, Outlet } from "react-router-dom";
 import { fetchMovie } from "../../movies-api";
-import MovieItem from "../../components/MovieItem/MovieItem"
-import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo"
+import MovieItem from "../../components/MovieItem/MovieItem";
+import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo";
 
 export default function MovieDetailsPage() {
   const [error, setError] = useState(null);
@@ -28,18 +28,13 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      {<div>{isLoading}</div>}
-
+      {isLoading && <div>Loading...</div>}
       {error && <p>Something wrong...</p>}
-
-       {movie && (
+      {movie && (
         <>
           <MovieItem movie={movie} />
-          <div >
-            <h2 >Additional information:</h2>
-          </div>
-          <AdditionalInfo />
           <Suspense fallback={null}>
+            <AdditionalInfo />
             <Outlet />
           </Suspense>
         </>
