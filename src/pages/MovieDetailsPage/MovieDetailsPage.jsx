@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import { Suspense, useEffect, useState, useRef } from "react";
+import { useParams, Outlet, useLocation } from "react-router-dom";
 import { fetchMovie } from "../../movies-api";
 import MovieItem from "../../components/MovieItem/MovieItem";
 import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo";
@@ -9,6 +9,8 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+  const goBack = useRef(location.state || '/');
 
   useEffect(() => {
     async function getMovie() {
@@ -34,7 +36,7 @@ export default function MovieDetailsPage() {
         <>
           <MovieItem movie={movie} />
           <Suspense fallback={null}>
-            <AdditionalInfo />
+            <AdditionalInfo goBack={goBack} />
             <Outlet />
           </Suspense>
         </>

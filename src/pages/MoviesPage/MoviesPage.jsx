@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { fetchMoviesByTitle } from '../../movies-api';
 import MoviesFilter from '../../components/MoviesFilter/MoviesFilter';
-import { useSearchParams} from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [params, setParams] = useSearchParams();
+
 
   const movieTitle = params.get('query') ?? '';
 
@@ -18,7 +19,7 @@ export default function MoviesPage() {
     }
 
     refreshMovies();
-  }, [movieTitle]);
+  }, [movieTitle, params]); 
 
   const fetchMovies = async movieTitle => {
     try {
@@ -36,7 +37,6 @@ export default function MoviesPage() {
 
   const handleSubmit = query => {
     setParams({ query });
-    history.push(`/movies?query=${query}`);
     fetchMovies(query);
   };
 

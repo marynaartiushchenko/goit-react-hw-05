@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReview } from '../../movies-api';
 import ReviewsGallery from '../ReviewsGallery/ReviewsGallery';
+import { Audio } from 'react-loader-spinner'
 
 export default function MovieReviews() {
   const [error, setError] = useState(null);
@@ -27,7 +28,7 @@ export default function MovieReviews() {
 
   return (
     <>
-      {<div>{isLoading}</div>}
+      {isLoading && {Audio}}
       {error && <p>Something wrong...</p>}
       {reviews && <ReviewsGallery reviews={reviews} />}
     </>

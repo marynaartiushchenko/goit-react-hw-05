@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const MovieListContent = ({ movie }) => {
   if (!movie.poster_path) {
     return null;
@@ -5,9 +7,9 @@ const MovieListContent = ({ movie }) => {
 
   return (
     <li>
-      <a href={`/movies/${movie.id}`}>
+      <Link to={`/movies/${movie.id}`}>
         <p>{movie.title}</p>
-      </a>
+      </Link>
     </li>
   );
 };
