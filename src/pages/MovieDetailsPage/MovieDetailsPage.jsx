@@ -1,17 +1,16 @@
-import { Suspense, useEffect, useState, useRef } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useParams, Outlet, useLocation } from "react-router-dom";
 import { fetchMovie } from "../../movies-api";
 import MovieItem from "../../components/MovieItem/MovieItem";
 import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo";
-import { NavLink } from "react-router-dom";
 
 export default function MovieDetailsPage() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [goBack, setGoBack] = useState('/');
   const { movieId } = useParams();
   const location = useLocation();
-  const goBack = useRef(location.state || '/');
 
   useEffect(() => {
     async function getMovie() {
@@ -29,6 +28,10 @@ export default function MovieDetailsPage() {
     getMovie();
   }, [movieId]);
 
+  useEffect(() => {
+    setGoBack(location.state || '/');
+  }, [location]);
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
@@ -36,8 +39,8 @@ export default function MovieDetailsPage() {
       {movie && (
         <>
           <MovieItem movie={movie} />
-          <Suspense fallback={null}>
-            <AdditionalInfo goBack={goBack} />
+          <AdditionalInfo goBack={goBack} />
+          <Suspense fallback={null}>           
             <Outlet />
           </Suspense>
         </>
