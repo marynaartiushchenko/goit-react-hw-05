@@ -5,6 +5,8 @@ const MovieListContent = ({ movie }) => {
     return null;
   }
 
+console.log(movie.id); 
+
   return (
     <li>
       <Link to={`/movies/${movie.id}`}>
