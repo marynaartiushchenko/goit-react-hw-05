@@ -2,12 +2,14 @@ export default function ReviewCard({ review }) {
   return (
     <li>
       <h3>Author: {review.author}</h3>
-      <div dangerouslySetInnerHTML={{ __html: review.content }}></div>
+      <p>Created: {new Date(review.created_at).toLocaleString()}</p>
+      <p>{review.content}</p>
       <a
         href={review.url}
         target="_blank"
-        rel="noopener noreferrer"
-      ></a>
+        rel="noopener noreferrer">
+        <i>Read original</i>
+      </a>
     </li>
   );
 }
