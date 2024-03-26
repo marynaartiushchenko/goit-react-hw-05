@@ -3,6 +3,7 @@ import { useParams, Outlet, useLocation } from "react-router-dom";
 import { fetchMovie } from "../../movies-api";
 import MovieItem from "../../components/MovieItem/MovieItem";
 import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo";
+import { NavLink } from "react-router-dom";
 
 export default function MovieDetailsPage() {
   const [error, setError] = useState(null);

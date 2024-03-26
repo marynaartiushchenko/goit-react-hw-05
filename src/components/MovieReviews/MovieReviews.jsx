@@ -28,7 +28,7 @@ export default function MovieReviews() {
 
   return (
     <>
-      {isLoading && {Audio}}
+      {isLoading && <Audio />}
       {error && <p>Something wrong...</p>}
       {reviews && <ReviewsGallery reviews={reviews} />}
     </>

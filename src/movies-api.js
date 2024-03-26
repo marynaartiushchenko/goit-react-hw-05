@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 const details = {
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2M3M2U1ZmZjYmM3M2QxMzZjNzVlNjgzNzgyNWMwOSIsInN1YiI6IjY1ZThhNjZmZWE0MjYzMDE0ODIxMzg3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YYO_HkBYktrFDc7YLqc5t-uJVjluAhdjAZzgD3mpi00',
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWUxYWExOGZjMjU3NTAyOTgxOTdlYTMzZTEzYmEyZCIsInN1YiI6IjY1ZjI1ZTVjMmZkZWM2MDE3MDIxOGVlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OlShGZBsYMzfdminRWQTrcgcT_tn5G7_9QXa92iRne8',
   },
   params: {},
 };
