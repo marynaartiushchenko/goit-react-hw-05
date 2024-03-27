@@ -19,5 +19,3 @@ export default function AdditionalInfo() {
     </div>
   );
 }
-
-console.log('aAdditionalInfo');
