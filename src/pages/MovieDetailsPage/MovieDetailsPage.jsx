@@ -28,9 +28,11 @@ export default function MovieDetailsPage() {
     getMovie();
   }, [movieId]);
 
-  useEffect(() => {
+ useEffect(() => {
+  if (movieId !== null && movieId !== undefined) {
     setGoBack(location.state || '/');
-  }, [location]);
+  }
+}, [location, movieId]);
 
   return (
     <>

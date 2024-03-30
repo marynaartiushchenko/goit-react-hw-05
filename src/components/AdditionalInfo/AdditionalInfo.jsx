@@ -6,15 +6,13 @@ export default function AdditionalInfo() {
       <h2>Additional information:</h2>
       <nav>  
         <ul>
-         <li>
-        <NavLink to="cast">Cast info</NavLink>
-      </li>
-      <li>
-        <NavLink to="reviews">Reviews</NavLink>
-      </li>
+          <li>
+            <NavLink to={`/movies/:movieId/cast`}>Cast info</NavLink>
+          </li>
+          <li>
+            <NavLink to={`/movies/:movieId/reviews`}>Reviews</NavLink>
+          </li>
         </ul>
-        
-
       </nav>
     </div>
   );
